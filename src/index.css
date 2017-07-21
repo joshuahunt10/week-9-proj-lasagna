@@ -2,4 +2,12 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Funky_Stuff_mixtape.jpg/800px-Funky_Stuff_mixtape.jpg');
+  background-size: cover;
+ background-repeat: no-repeat;
+ background-attachment: fixed;
+}
+
+.container div{
+  background-color: #1985A1;
 }
