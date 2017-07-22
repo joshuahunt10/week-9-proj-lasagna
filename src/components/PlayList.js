@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PlayListItem from './PlayListItem'
 
 class PlayList extends Component {
 
@@ -37,22 +38,10 @@ class PlayList extends Component {
     return (
       <div className='container'>
         <form onSubmit={this.fetchData}>
-          <input type="submit" />
+          <button type="submit">Update</button>
         </form>
           <div className="card-group">
-              {this.state.songs.map((block) => {
-                return(
-                  <div className="card-block" key={block._id}>
-                    <p className="card-text"><strong>ID:{block._id}</strong></p>
-
-                    <p className="card-text"><strong>User:{block.userName}</strong></p>
-                    <p className="card-text"><strong>Artist/Band:{block.songArtist}</strong></p>
-                    <p className="card-text"><strong>Title:{block.songTitle}</strong></p>
-                    <p className="card-text"><strong>Notes:{block.songNotes}</strong></p>
-                  </div>
-
-                )
-              })}
+              <PlayListItem songs={this.state.songs}/>
           </div>
         </div>
     );
