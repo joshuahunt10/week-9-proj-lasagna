@@ -9,7 +9,7 @@ class PlayList extends Component {
       songs: []
     }
 
-    this.handleUpdateFetch = this.handleUpdateFetch.bind(this)
+    this.fetchData = this.fetchData.bind(this)
   }
 
 
@@ -24,16 +24,19 @@ class PlayList extends Component {
   }
 
 
-    handleUpdateFetch(event){
-      event.preventDefault()
-      console.log(this.state.songs);
+  fetchData = (e) => {
+      e.preventDefault();
+      fetch('https://tiny-lasagna-server.herokuapp.com/collections/playlisting').then(results => {
+        return results.json();
+      }).then(data => {
+        this.setState({songs: data});
+      })
     }
-
 
   render() {
     return (
       <div className='container'>
-        <form onSubmit={this.handleUpdateFetch}>
+        <form onSubmit={this.fetchData}>
           <input type="submit" />
         </form>
           <div className="card-group">
