@@ -11,3 +11,19 @@ body {
 .container div{
   background-color: #1985A1;
 }
+
+
+/*.form-inline{
+  flex-direction: column;
+  flex-basis: 80%;
+  justify-content: flex-start;
+}
+
+.flex-box{
+  display: flex;
+  justify-content: space-around;
+}*/
+
+.card-group{
+  flex-direction: column;
+}

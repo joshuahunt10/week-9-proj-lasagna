@@ -9,13 +9,30 @@ import PlayListForm from './components/PlayListForm'
 class App extends Component {
   render() {
     return (
-      <div className="container">
+      <div id="root">
         <NavBar />
-        <PlayListForm />
-        <PlayList />
+        <div className="container">
+          <div className="row">
+            <div className="col-6">
+              <PlayListForm />
+            </div>
+
+            <div className="col">
+              1 of 3
+            </div>
+            <div className="col-5">
+              <PlayList />
+            </div>
+          </div>
+
+        </div>
       </div>
     );
   }
 }
+
+
+
+
 
 export default App;
