@@ -6,42 +6,23 @@ class PlayList extends Component {
   constructor(props){
     super(props)
 
-    this.state = {
-      songs: []
-    }
-
-    this.fetchData = this.fetchData.bind(this)
+    this.handleFormUpdate = this.handleFormUpdate.bind(this)
   }
 
-
-
-  componentDidMount(){
-    fetch('https://tiny-lasagna-server.herokuapp.com/collections/playlisting').then(results => {
-      return results.json();
-    }).then(data => {
-      this.setState({songs: data});
-      console.log("state", this.state.songs);
-    })
+  handleFormUpdate(e){
+    e.preventDefault();
+    this.props.handleUpdate()
   }
 
-
-  fetchData = (e) => {
-      e.preventDefault();
-      fetch('https://tiny-lasagna-server.herokuapp.com/collections/playlisting').then(results => {
-        return results.json();
-      }).then(data => {
-        this.setState({songs: data});
-      })
-    }
 
   render() {
     return (
       <div className='container'>
-        <form onSubmit={this.fetchData}>
+        <form onSubmit={this.handleFormUpdate}>
           <button type="submit">Update</button>
         </form>
           <div className="card-group">
-              <PlayListItem songs={this.state.songs}/>
+              <PlayListItem songs={this.props.songs}/>
           </div>
         </div>
     );

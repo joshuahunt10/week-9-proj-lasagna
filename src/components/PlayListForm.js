@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PlayList from './PlayList'
 
 class PlayListForm extends Component {
   constructor(props){
@@ -8,13 +9,28 @@ class PlayListForm extends Component {
       userName: "",
       songArtist:"",
       songTitle:"",
-      songNotes:""
+      songNotes:"",
+      songs:[]
     }
     this.handleUserNameChange = this.handleUserNameChange.bind(this)
     this.handleArtistChange = this.handleArtistChange.bind(this)
     this.handleTitleChange = this.handleTitleChange.bind(this)
     this.handleNotesChange = this.handleNotesChange.bind(this)
     this.addToList = this.addToList.bind(this)
+
+    this.fetchData = this.fetchData.bind(this)
+  }
+
+  fetchData(){
+    fetch('https://tiny-lasagna-server.herokuapp.com/collections/playlisting')
+    .then(r => r.json())
+    .then(data => {
+      console.log(data);
+      this.setState({songs: data})
+    })
+  }
+  componentDidMount(){
+    this.fetchData()
   }
   handleUserNameChange(event){
     this.setState({
@@ -40,14 +56,16 @@ class PlayListForm extends Component {
     })
   }
 
+
   addToList = (e) => {
       e.preventDefault();
-      this.setState({userName: e.target.value, songTitle: e.target.value, songArtist: e.target.value, songNotes: e.target.value});
-      let listItem = JSON.stringify(this.state);
+      // clearing out your form
+      // this.setState({userName: e.target.value, songTitle: e.target.value, songArtist: e.target.value, songNotes: e.target.value});
+      // let listItem = ;
 
       fetch("https://tiny-lasagna-server.herokuapp.com/collections/playlisting", {
         method: "POST",
-        body: listItem,
+        body: JSON.stringify(this.state),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -55,15 +73,21 @@ class PlayListForm extends Component {
     }
     ).then(response => {
       console.log(response, "yay");
-
-    }).catch(err => {
+    })
+    .then( () => {
+      console.log('inside the then');
+      this.fetchData()
+    })
+    .catch(err => {
       console.log(err, "boo!");
-    });
+    })
+
     this.setState({userName: '', songNotes: '', songArtist: '', songTitle:''});
   }
 
   render() {
     return (
+      <div>
       <form onSubmit={this.addToList}>
 
         <div className="form-group">
@@ -81,6 +105,9 @@ class PlayListForm extends Component {
           </div>
           <input type="submit" />
         </form>
+        <PlayList
+            handleUpdate={this.fetchData} songs={this.state.songs} />
+      </div>
 
       )
     }
