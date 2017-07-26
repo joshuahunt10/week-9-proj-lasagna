@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PlayList from './PlayList'
+import '../styles/App.css'
 
 class PlayListForm extends Component {
   constructor(props){
@@ -87,26 +88,33 @@ class PlayListForm extends Component {
 
   render() {
     return (
-      <div>
-      <form onSubmit={this.addToList}>
+    <div>
+      <div className="container" id="playListFormContainer">
+        <h2>Add your own track!</h2>
+        <form className="playListForm" onSubmit={this.addToList}>
 
-        <div className="form-group">
-          <label htmlFor="userName">Username</label>
-          <input type="text" className="form-control" id="userName_input" aria-describedby="emailHelp" placeholder="Username" value={this.state.userName} onChange={this.handleUserNameChange}/>
+          <div className="form-group row">
+            <label htmlFor="userName">Username</label>
+            <input type="text" className="form-control" id="userName_input" aria-describedby="emailHelp" placeholder="Username" value={this.state.userName} onChange={this.handleUserNameChange}/>
 
-          <label htmlFor="songArtist">Artist/Band</label>
-          <input type="text" className="form-control" id="songArtist-band-input" aria-describedby="emailHelp" placeholder="Artist/Band" value={this.state.songArtist} onChange={this.handleArtistChange}/>
+            <label htmlFor="songArtist">Artist/Band</label>
+            <input type="text" className="form-control" id="songArtist-band-input" aria-describedby="emailHelp" placeholder="Artist/Band" value={this.state.songArtist} onChange={this.handleArtistChange}/>
 
-          <label htmlFor="songTitle">Song Title</label>
-          <input type="text" className="form-control" id="song-songTitle-input" aria-describedby="emailHelp" placeholder="Song Title" value={this.state.songTitle} onChange={this.handleTitleChange}/>
+            <label htmlFor="songTitle">Song Title</label>
+            <input type="text" className="form-control" id="song-songTitle-input" aria-describedby="emailHelp" placeholder="Song Title" value={this.state.songTitle} onChange={this.handleTitleChange}/>
 
-            <label htmlFor="songNotes">Notes about Song:</label>
-            <textarea className="form-control" id="songNotes-input" rows="3" value={this.state.songNotes} onChange={this.handleNotesChange}></textarea>
+              <label htmlFor="songNotes">Notes about Song:</label>
+              <textarea className="form-control" id="songNotes-input" rows="3" value={this.state.songNotes} onChange={this.handleNotesChange}></textarea>
+            </div>
+            <div class="offset-sm-2 col-sm-10">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+          </form>
           </div>
-          <input type="submit" />
-        </form>
-        <PlayList
-            handleUpdate={this.fetchData} songs={this.state.songs} />
+          <PlayList
+              handleUpdate={this.fetchData} songs={this.state.songs} />
+
       </div>
 
       )

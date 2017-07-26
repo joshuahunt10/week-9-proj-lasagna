@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PlayListItem from './PlayListItem'
+import '../styles/App.css'
 
 class PlayList extends Component {
 
@@ -17,11 +18,11 @@ class PlayList extends Component {
 
   render() {
     return (
-      <div className='container'>
+      <div className='container' id="playListContainer">
         <form onSubmit={this.handleFormUpdate}>
-          <button type="submit">Update</button>
+          <button type="submit">Update the List</button>
         </form>
-          <div className="card-group">
+          <div>
               <PlayListItem songs={this.props.songs}/>
           </div>
         </div>
